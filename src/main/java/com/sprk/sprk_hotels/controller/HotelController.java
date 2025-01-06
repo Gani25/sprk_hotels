@@ -1,5 +1,7 @@
 package com.sprk.sprk_hotels.controller;
 
+import com.sprk.sprk_hotels.service.ListingService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,9 +14,13 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@AllArgsConstructor
 public class HotelController {
+
+    private ListingService listingService;
 
     @GetMapping("/listings/add")
     public String showAddForm(Model model) {
@@ -24,14 +30,17 @@ public class HotelController {
     }
 
     @PostMapping("/listings")
-    public String saveListing(@Valid @ModelAttribute Listing listing, BindingResult bindingResult) {
+    public String saveListing(@Valid @ModelAttribute Listing listing, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         // Handling Server Side validation
         if (bindingResult.hasErrors()) {
-            System.out.println(listing);
             return "listing-form";
         }
 
-        return "index";
+        // Save to DB
+        listingService.saveListing(listing);
+        redirectAttributes.addFlashAttribute("successMessage", "Your listing added successfully");
+
+        return "redirect:/listings/add";
     }
 
 }
