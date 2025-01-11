@@ -5,6 +5,8 @@ import com.sprk.sprk_hotels.repository.ListingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class ListingServiceImpl implements ListingService{
@@ -16,4 +18,11 @@ public class ListingServiceImpl implements ListingService{
         Listing savedListing = listingRepository.save(listing);
         return savedListing;
     }
+
+    @Override
+    public List<Listing> getAllListings() {
+        return listingRepository.findAll();
+
+    }
+
 }

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 public class HotelController {
@@ -41,6 +43,15 @@ public class HotelController {
         redirectAttributes.addFlashAttribute("successMessage", "Your listing added successfully");
 
         return "redirect:/listings/add";
+    }
+
+    // Show all hotels list
+    @GetMapping(value= {"/","/listing"})
+    public String showAllHotels(Model model) {
+        List<Listing> listings = listingService.getAllListings();
+        model.addAttribute("allListings", listings);
+
+        return "index";
     }
 
 }
