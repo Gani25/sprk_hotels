@@ -9,4 +9,6 @@ public interface ListingService {
     Listing saveListing(Listing listing);
 
     List<Listing> getAllListings();
+
+    Listing getListingById(int id);
 }

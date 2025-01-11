@@ -5,15 +5,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import com.sprk.sprk_hotels.model.Listing;
 
 import jakarta.validation.Valid;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -46,12 +43,27 @@ public class HotelController {
     }
 
     // Show all hotels list
-    @GetMapping(value= {"/","/listing"})
+    @GetMapping(value= {"/","/listings"})
     public String showAllHotels(Model model) {
         List<Listing> listings = listingService.getAllListings();
         model.addAttribute("allListings", listings);
 
         return "index";
+    }
+
+    // Show hotel by id
+    @GetMapping("/listings/view/{id}")
+public String showHotelById(@PathVariable int id, Model model, RedirectAttributes redirectAttributes ) {
+        Listing listing = listingService.getListingById(id);
+
+        if(listing != null) {
+            model.addAttribute("listing", listing);
+            return "show-listing";
+        }
+        else{
+            redirectAttributes.addFlashAttribute("errorMessage", "Your listing not found in our record!");
+            return "redirect:/listings";
+        }
     }
 
 }

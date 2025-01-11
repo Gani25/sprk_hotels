@@ -25,4 +25,9 @@ public class ListingServiceImpl implements ListingService{
 
     }
 
+    @Override
+    public Listing getListingById(int id) {
+        return listingRepository.findById(id).orElse(null);
+    }
+
 }

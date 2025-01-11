@@ -6,28 +6,39 @@
 </head>
 
 <body>
-    <div th:replace="my-navbar :: div"></div>
-    <div class="container">
-        <div class="row mt-5">
+<div th:replace="my-navbar :: div"></div>
+<div class="container">
+    <!-- Flash message section -->
+    <div class="alert alert-danger w-75 mx-auto mt-3" role="alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
 
-            <div class="card" th:each="listing:${allListings} ">
-                <img th:src="${listing.imageUrl}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${listing.title}"></h5>
-                    <p class="card-text"><th:block th:text="${listing.price}"></th:block>/per night </p>
-                    <a href="#" class="btn btn-primary">Book Now</a>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mt-5">
+
+        <div class="col my-2" th:each="listing:${allListings} ">
+            <a th:href="@{/listings/view/{id}(id=${listing.id})}" class="listing-link">
+                <div class="card mt-3">
+                    <img th:src="${listing.imageUrl}" class="card-img-top" alt="hotel image">
+                    <div class="card-img-overlay">
+
+                    </div>
+                    <div class="card-body mt-2">
+                        <h5 class="card-title" th:text="${listing.title}"></h5>
+                        <p class="card-text">
+                            <th:block th:text="${listing.price}"></th:block>/per night
+                        </p>
+
+                    </div>
                 </div>
-            </div>
-
+            </a>
         </div>
 
-        <!-- All listings -->
     </div>
 
+    <!-- All listings -->
+</div>
+<br>
+<br><br>
 
-
-
-    <div th:replace="commons/all-js-links :: div"></div>
+<div th:replace="commons/all-js-links :: div"></div>
 
 </body>
 
