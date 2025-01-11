@@ -11,4 +11,6 @@ public interface ListingService {
     List<Listing> getAllListings();
 
     Listing getListingById(int id);
+
+    void deleteListingById(int id);
 }

@@ -23,7 +23,7 @@
                     <div class="card-body mt-2">
                         <h5 class="card-title" th:text="${listing.title}"></h5>
                         <p class="card-text">
-                            <th:block th:text="${listing.price}"></th:block>/per night
+                            <span th:text="${listing.price}" class="fw-bold fst-italic"></span>/per night
                         </p>
 
                     </div>

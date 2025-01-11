@@ -13,7 +13,7 @@
             <!-- Flash message section -->
             <div class="alert alert-success w-75 mx-auto mb-3" role="alert" th:if="${successMessage}" th:text="${successMessage}"></div>
 
-            <form class="row " th:object="${listing}" method="post" th:action="@{/listings}">
+            <form class="row " th:object="${listing}" method="post" th:action="@{/listings(id=${listing.id})}">
                 <div class="mb-4 col-12 ">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" id="title" class="form-control" th:field="*{title}" placeholder="Goa, Calungate">
@@ -39,7 +39,7 @@
                     <div class="text-danger" th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"></div>
                 </div>
                 <button type="submit" class="btn btn-primary mt-3 save-btn"><i class="fa-regular fa-bookmark"></i>
-                    Save</button>
+                    <span th:text="${btn_name}"></span> </button>
             </form>
 
         </div>

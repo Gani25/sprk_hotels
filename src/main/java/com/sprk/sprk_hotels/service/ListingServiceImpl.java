@@ -30,4 +30,9 @@ public class ListingServiceImpl implements ListingService{
         return listingRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public void deleteListingById(int id) {
+        listingRepository.deleteById(id);
+    }
+
 }
