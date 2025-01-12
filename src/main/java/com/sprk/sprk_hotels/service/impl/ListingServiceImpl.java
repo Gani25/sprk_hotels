@@ -1,7 +1,8 @@
-package com.sprk.sprk_hotels.service;
+package com.sprk.sprk_hotels.service.impl;
 
 import com.sprk.sprk_hotels.model.Listing;
 import com.sprk.sprk_hotels.repository.ListingRepository;
+import com.sprk.sprk_hotels.service.ListingService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class ListingServiceImpl implements ListingService{
+public class ListingServiceImpl implements ListingService {
 
     private ListingRepository listingRepository;
 
