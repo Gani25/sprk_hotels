@@ -6,6 +6,8 @@ import com.sprk.sprk_hotels.repository.RoleRepository;
 import com.sprk.sprk_hotels.repository.UserRepository;
 import com.sprk.sprk_hotels.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -16,6 +18,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -31,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
         RoleModel roleModel = roleRepository.findByName("ROLE_USER").get();
 
+        userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
 
         userModel.setRoles(Set.of(roleModel));
         UserModel savedUser = userRepository.save(userModel);

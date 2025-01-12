@@ -50,7 +50,7 @@ public class UserRegisterController {
             // insert
             userService.saveUserModel(userModel);
             redirectAttributes.addFlashAttribute("successMessage", "User saved successfully");
-            return "redirect:/listings/signup";
+            return "redirect:/listings/login";
 
         }
     }
